@@ -20,7 +20,7 @@ bash_pkgs=(
 
 py_pkgs=(
 	'http://download.pytorch.org/whl/cu80/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl'
-	'https://cntk.ai/PythonWheel/GPU-1bit-SGD/cntk-2.0-cp35-cp35m-linux_x86_64.whl'
+	'https://cntk.ai/PythonWheel/GPU/cntk-2.0-cp35-cp35m-linux_x86_64.whl'
 	'torchvision'
 	'tensorflow-gpu'
 	'keras'
