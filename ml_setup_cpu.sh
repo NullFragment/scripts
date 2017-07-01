@@ -20,6 +20,7 @@ bash_pkgs=(
 
 py_pkgs=(
 	'http://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl'
+	'https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0-cp35-cp35m-linux_x86_64.whl'
 	'torchvision'
 	'tensorflow'
 	'keras'
@@ -27,27 +28,27 @@ py_pkgs=(
 	)
 
 echo "Updating package repositories"
-sudo apt-get -qq update 
+sudo apt-get update 
 
 echo "Upgrading installed packages"
-sudo apt-get -qq upgrade -y 
+sudo apt-get upgrade -y 
 
 echo "Installing requested packages"
 for i in "${bash_pkgs[@]}"
 do
-	sudo -H apt-get -qq install -y $i 
+	sudo -H apt-get install -y $i 
 done
 
 echo "Ensuring pip is up-to-date"
-sudo -H pip3 install -qq --upgrade pip 
+sudo -H pip3 install --upgrade pip 
 
 echo "Installing python ML packages"
 for i in "${py_pkgs[@]}"
 do
-	sudo -H pip3 install -qq $i 
+	sudo -H pip3 install $i 
 done
 
 echo "Cleaning up unnecessary packages..."
-sudo apt-get -qq update 
-sudo apt -qq autoremove -y 
+sudo apt-get update 
+sudo apt autoremove -y 
 echo "Finished"
