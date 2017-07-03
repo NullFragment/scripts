@@ -89,14 +89,24 @@ echo -e "\e[1;31mCleaning up unnecessary packages...\e[0m"
 sudo apt-get update 
 sudo apt autoremove -y 
 
-echo -e "\e[1;31mExtracting dotfiles...\e[0m"
-cp ./dotfiles/* ~/
 
-echo -e "\e[1;31mDownloading vundle, Powerline fonts and Solarized terminal fix...\e[0m"
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+echo -e "\e[1;31mDownloading github repos...\e[0m"
 git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git ~/Downloads/temp/solarized
 git clone https://github.com/powerline/fonts.git ~/Downloads/temp/fonts
+git clone https://github.com/NullFragment/scripts.git ~/Downloads/temp/scripts
 
+echo -e "\e[1;31mInstalling Vundle...\e[0m"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+echo -e "\e[1;31mExtracting dotfiles...\e[0m"
+cd ~/Downloads/temp/scripts/dotfiles/
+for file in ./*;
+do
+	cp $file ~/
+done
+
+echo -e "\e[1;31mInstalling Powerline Fonts and Solarized terminal fix...\e[0m"
 ~/Downloads/temp/fonts/install.sh
 ~/Downloads/temp/solarized/install.sh
 
