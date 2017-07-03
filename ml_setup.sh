@@ -26,6 +26,7 @@ bash_pkgs=(
 	'python3-pip'
 	'python3-tk'
 	'python3-numpy'
+	'ipython3'
 	'openmpi-bin'
 	)
 
