@@ -22,12 +22,18 @@ bash_pkgs=(
 	'vim'
 	'htop'
 	'git'
+	'python'
+	'python-dev'
+	'python-pip'
+	'python-tk'
 	'python3'
+	'python3-dev'
 	'python3-pip'
 	'python3-tk'
 	'python3-numpy'
 	'ipython3'
 	'openmpi-bin'
+	'neovim'
 	)
 
 py_pkgs=(
@@ -50,6 +56,8 @@ gpu_ml_pkgs=(
 	)
 
 echo -e "\e[1;31mUpdating package repositories\e[0m"
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository -y ppa:neovim-ppa/stable
 sudo apt-get update 
 
 echo -e "\e[1;31mUpgrading installed packages\e[0m"
@@ -113,4 +121,8 @@ echo -e "\e[1;31mInstalling Powerline Fonts and Solarized terminal fix...\e[0m"
 
 echo -e "\e[1;31mFinished installing."
 echo -e "You must run ':PluginInstall' in VIM to complete VIM setup."
-echo -e "For Airline to display properly, change your terminal font to 'Ubuntu Mono derivative Powerline Regular' in your profile settings.\e[0m"
+echo -e "For Airline to display properly, change your terminal font to" 
+echo -e "'Ubuntu Mono derivative Powerline Regular' in your profile settings."
+echo -e "*******************************"
+echo -e "NOTE: If you are using a GPU setup, you must still install the latest nVidia CUDA drivers manually."
+echo -e "*******************************\e[0m"
