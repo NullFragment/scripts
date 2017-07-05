@@ -20,8 +20,10 @@ echo -e "\e[1;35m***************************************************************
 install -d ~/Downloads/temp
 cd ~/Downloads/temp
 touch install.log
+mkdir ~/.zsh/
 
 bash_pkgs=(
+	'curl'
 	'zsh'
 	'xterm'
 	'tmux'
@@ -86,12 +88,14 @@ sudo -H pip3 install --upgrade pip
 
 if x=1; then
 	echo -e "\e[1;31mInstalling python CPU ML packages\e[0m"
+	echo -e "\e[1;35m****************************************************************************\e[0m"
 	for i in "${cpu_ml_pkgs[@]}"
 	do
 		sudo -H pip3 install $i >> ~/Downloads/temp/install.log
 	done
 elif x=2; then
 	echo -e "\e[1;31mInstalling python GPU ML packages\e[0m"
+	echo -e "\e[1;35m****************************************************************************\e[0m"
 	for i in "${gpu_ml_pkgs[@]}"
 	do
 		sudo -H pip3 install $i >> ~/Downloads/temp/install.log
@@ -132,6 +136,14 @@ for file in ./*;
 do
 	cp $file ~/
 done
+
+echo -e "\e[1;31mInstalling zsh Plugins...\e[0m"
+echo -e "\e[1;35m****************************************************************************\e[0m"
+curl -L git.io/antigen > ~/.zsh/antigen.zsh
+
+echo -e "\e[1;31mSetting zsh as default shell...\e[0m"
+echo -e "\e[1;35m****************************************************************************\e[0m"
+sudo chsh $USER -s $(which zsh)
 
 echo -e "\e[1;31mInstalling Powerline Fonts and Solarized terminal fix...\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
