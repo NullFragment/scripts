@@ -23,7 +23,9 @@ touch install.log
 mkdir ~/.zsh/
 
 bash_pkgs=(
+	'build-essential'
 	'curl'
+	'cmake'
 	'zsh'
 	'xterm'
 	'tmux'
@@ -128,14 +130,17 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo -e "\e[1;31mInstalling VIM Plugins...\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 echo | echo | vim +PluginInstall +qall &>/dev/null
+~/.vim/bundle/youcompleteme/install.py --clang-completer
 
 echo -e "\e[1;31mExtracting dotfiles...\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 cd ~/Downloads/temp/scripts/dotfiles/
-for file in ./*;
+shopt -s dotglob
+for file in .*;
 do
 	cp $file ~/
 done
+shopt -u dotglob
 
 echo -e "\e[1;31mInstalling zsh Plugins...\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
