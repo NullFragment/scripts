@@ -1,5 +1,6 @@
-# The following lines were added by compinstall
-
+###################################################
+### The following lines were added by compinstall
+###################################################
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' expand prefix suffix
 zstyle ':completion:*' file-sort name
@@ -19,16 +20,36 @@ zstyle :compinstall filename '/home/kyle/.zshrc'
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
-# Lines configured by zsh-newuser-install
+###################################################
+### End of lines added by compinstall
+###################################################
+
+###################################################
+### Lines configured by zsh-newuser-install
+###################################################
 HISTFILE=~/.zsh_histfile
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory autocd extendedglob nomatch
 unsetopt beep notify
 bindkey -e
-# End of lines configured by zsh-newuser-install
+###################################################
+### End of lines configured by zsh-newuser-install
+###################################################
 
+###################################################
+### ALIASES
+###################################################
+
+alias tmk='tmux kill-session -t'
+alias tmn='tmux new -s'
+alias tml='tmux list-sessions'
+alias tma='tmux a -t'
+alias ll='ls -l'
+
+###################################################
+### PLUGINS
+###################################################
 source ~/.zsh/antigen.zsh
 antigen bundle joel-porquet/zsh-dircolors-solarized.git
 setupsolarized
