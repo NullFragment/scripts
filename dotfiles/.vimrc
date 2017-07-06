@@ -15,7 +15,8 @@ Plugin 'scrooloose/syntastic'		" Syntax check
 Plugin 'scrooloose/nerdcommenter'	" Comment helper
 Plugin 'bling/vim-airline'		" Status Bar
 Plugin 'vim-airline/vim-airline-themes'	" Airline Themes
-"Plugin 'valloric/youcompleteme'		" Autocomplete
+Plugin 'valloric/youcompleteme'		" Autocomplete
+Plugin 'epeli/slimux'			" Tmux send line
 
 " COLOR SCHEMES
 Plugin 'altercation/vim-colors-solarized'	
@@ -50,7 +51,9 @@ set background=dark
 colorscheme solarized
 
 
-
+nnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
+vnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
+nnoremap <C-c><C-v> :SlimuxREPLConfigure<CR>
 
 " air-line
 let g:airline_powerline_fonts = 1
