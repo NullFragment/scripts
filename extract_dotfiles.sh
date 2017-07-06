@@ -9,6 +9,7 @@ dotfiles=(
     '.tmux.conf'
     '.vimrc'
     '.zshrc'
+    '.tmuxinator/ml_sys.yml'
     )
 
 for file in ${dotfiles[@]}; do
@@ -18,4 +19,3 @@ done
 for file in ${dotfiles[@]}; do
     cp ~/$file $SCRIPTPATH/dotfiles/
 done
-

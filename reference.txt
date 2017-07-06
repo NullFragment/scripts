@@ -1,0 +1,12 @@
+.bash_aliases
+.tmux.conf
+.vimrc
+.zshrc
+.tmuxinator/ml_sys.yml
+
+
+dots_file=~/Downloads/temp/scripts/dots.txt
+while read -r dot
+do
+    cp ~/Downloads/temp/scripts/dotfiles/$dot ~/
+done < $dots_file

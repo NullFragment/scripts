@@ -26,6 +26,7 @@ bash_pkgs=(
     'ipython3'
     'openmpi-bin'
     'neovim'
+    'rubygems'
     )
 
 py_pkgs=(
@@ -85,6 +86,7 @@ install -d ~/Downloads/temp
 cd ~/Downloads/temp
 touch install.log
 mkdir ~/.zsh/
+mkdir ~/.tmuxinator/
 
 ####################################
 ### ADD/UPDATE APT REPOS         ###
@@ -173,6 +175,8 @@ do
 done
 shopt -u dotglob
 
+mv ~/ml_sys.yml ~/.tmuxinator/ml_sys.yml
+
 ####################################
 ### GITHUB REPOS                 ###
 ####################################
@@ -184,6 +188,11 @@ git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git ~/Dow
 git clone https://github.com/powerline/fonts.git ~/Downloads/temp/fonts
 git clone https://github.com/NullFragment/scripts.git ~/Downloads/temp/scripts
 
+####################################
+### RUBY GEMS                    ###
+####################################
+
+yes | sudo gem install tmuxinator
 
 ####################################
 ### VIM PLUGINS                  ###

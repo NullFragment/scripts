@@ -1,0 +1,10 @@
+# ~/.tmuxinator/ml_sys.yml
+name: ml_system
+root: ~/
+
+windows:
+  - machine_learning:
+      layout: main-vertical
+      panes:
+        - clear;ipython3
+        - clear;vim

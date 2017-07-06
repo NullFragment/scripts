@@ -38,7 +38,7 @@ bindkey -e
 ###################################################
 
 ###################################################
-### ALIASES
+### ALIASES & DEFAULTS
 ###################################################
 
 alias tmk='tmux kill-session -t'
@@ -46,6 +46,10 @@ alias tmn='tmux new -s'
 alias tml='tmux list-sessions'
 alias tma='tmux a -t'
 alias ll='ls -l'
+alias mux='tmuxinator'
+alias mlmux='tmuxinator ml_sys'
+
+export EDITOR=$(which vim)
 
 ###################################################
 ### PLUGINS
