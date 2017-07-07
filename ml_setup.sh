@@ -192,7 +192,7 @@ mv ~/ml_sys.yml ~/.tmuxinator/ml_sys.yml
 ### RUBY GEMS                    ###
 ####################################
 
-yes | sudo gem install tmuxinator
+yes | sudo gem install tmuxinator >> ~/Downloads/temp/install.log
 
 ####################################
 ### VIM PLUGINS                  ###
@@ -207,7 +207,7 @@ echo -e "\e[1;31mInstalling VIM Plugins...\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
 echo | echo | vim +PluginInstall +qall &>/dev/null
-~/.vim/bundle/youcompleteme/install.py --clang-completer
+~/.vim/bundle/youcompleteme/install.py --clang-completer >> ~/Downloads/temp/install.log
 
 ####################################
 ### ZSH PLUGINS                  ###
