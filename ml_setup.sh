@@ -161,23 +161,6 @@ sudo apt-get update >> ~/Downloads/temp/install.log
 sudo apt autoremove -y >> ~/Downloads/temp/install.log
 
 ####################################
-### DOTFILES                     ###
-####################################
-
-echo -e "\e[1;31mExtracting dotfiles...\e[0m"
-echo -e "\e[1;35m****************************************************************************\e[0m"
-
-cd ~/Downloads/temp/scripts/dotfiles/
-shopt -s dotglob
-for file in .*;
-do
-    cp $file ~/
-done
-shopt -u dotglob
-
-mv ~/ml_sys.yml ~/.tmuxinator/ml_sys.yml
-
-####################################
 ### GITHUB REPOS                 ###
 ####################################
 
@@ -187,6 +170,23 @@ echo -e "\e[1;35m***************************************************************
 git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git ~/Downloads/temp/solarized 
 git clone https://github.com/powerline/fonts.git ~/Downloads/temp/fonts
 git clone https://github.com/NullFragment/scripts.git ~/Downloads/temp/scripts
+
+####################################
+### DOTFILES                     ###
+####################################
+
+echo -e "\e[1;31mExtracting dotfiles...\e[0m"
+echo -e "\e[1;35m****************************************************************************\e[0m"
+
+cd ~/Downloads/temp/scripts/dotfiles/
+shopt -s dotglob
+for file in *;
+do
+    cp $file ~/
+done
+shopt -u dotglob
+
+mv ~/ml_sys.yml ~/.tmuxinator/ml_sys.yml
 
 ####################################
 ### RUBY GEMS                    ###
