@@ -10,6 +10,7 @@ dotfiles=(
     '.vimrc'
     '.zshrc'
     '.tmuxinator/ml_sys.yml'
+    '.config/octave/qt-settings'
     )
 
 for file in ${dotfiles[@]}; do
