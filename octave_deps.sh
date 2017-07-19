@@ -107,9 +107,12 @@ do
     sudo -H apt-get install -y $pkg > /dev/null
 done
 echo "Done installing dependencies."
-echo "To install Octave, unzip the tarfile and use the following commands:"
-echo "./configure"
-echo "make -j8"
-echo "sudo make install"
+echo "To install Octave:" 
+echo "1) Download the latest source .tar.gz file from the GNU Octave site."
+echo "2) Extract the tarfile and cd into the directory from the terminal."
+echo "3) Run the following commands, one at a time."
+echo "    ./configure"
+echo "    make -j8"
+echo "    sudo make install"
 echo "FINISHED"
 echo "======================================================================="
