@@ -28,26 +28,28 @@ bash_pkgs=(
     'neovim'
     'rubygems'
     )
+sh_len=${#bash_pkgs[@]}
 
 py_pkgs=(
     'torchvision'
     'keras'
     'matplotlib'
     )
+py_len=${#py_pkgs[@]}
 
 cpu_ml_pkgs=(
     'http://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl'
     'https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0-cp35-cp35m-linux_x86_64.whl'
     'tensorflow'
     )
-
+cpu_len=${#cpu_ml_pkgs[@]}
 
 gpu_ml_pkgs=(
     'http://download.pytorch.org/whl/cu80/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl'
     'https://cntk.ai/PythonWheel/GPU/cntk-2.0-cp35-cp35m-linux_x86_64.whl'
     'tensorflow-gpu'
     )
-
+gpu_len=${#gpu_ml_pkgs[@]}
 
 ####################################
 ### SELECT CPU/GPU               ###
@@ -112,9 +114,11 @@ sudo apt-get upgrade -y >> ~/Downloads/temp/install.log
 echo -e "\e[1;31mInstalling requested packages\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
-for i in "${bash_pkgs[@]}"
-do
-    sudo -H apt-get install -y $i >> ~/Downloads/temp/install.log
+for i in "${!bash_pkgs[@]}"
+do 
+    sh_pkg=${bash_pkgs[$i]}
+    printf "%02d/%s Installing: %s\n" "$((i+1))" "$sh_len" "$sh_pkg"
+    sudo -H apt-get install -y $sh_pkg >> ~/Downloads/temp/install.log
 done
 
 echo -e "\e[1;31mEnsuring pip is up-to-date\e[0m"
@@ -127,27 +131,33 @@ if x=1; then
     echo -e "\e[1;31mInstalling python CPU ML packages\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
 
-    for i in "${cpu_ml_pkgs[@]}"
-    do
-        sudo -H pip3 install $i >> ~/Downloads/temp/install.log
+    for i in "${!cpu_ml_pkgs[@]}"
+    do 
+        cpu_pkg=${cpu_ml_pkgs[$i]}
+        printf "%02d/%s Installing: %s\n" "$((i+1))" "$cpu_len" "$cpu_pkg"
+        sudo -H pip3 install $cpu_pkg >> ~/Downloads/temp/install.log
     done
 
 elif x=2; then
     echo -e "\e[1;31mInstalling python GPU ML packages\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
 
-    for i in "${gpu_ml_pkgs[@]}"
-    do
-        sudo -H pip3 install $i >> ~/Downloads/temp/install.log
+    for i in "${!gpu_ml_pkgs[@]}"
+    do 
+        gpu_pkg=${gpu_ml_pkgs[$i]}
+        printf "%02d/%s Installing: %s\n" "$((i+1))" "$gpu_len" "$gpu_pkg"
+        sudo -H pip3 install $gpu_pkg >> ~/Downloads/temp/install.log
     done
 fi
 
 echo -e "\e[1;31mInstalling universal python packages\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
-for i in "${py_pkgs[@]}"
-do
-    sudo -H pip3 install $i >> ~/Downloads/temp/install.log
+for i in "${!py_pkgs[@]}"
+do 
+    py_pkg=${py_pkgs[$i]}
+    printf "%02d/%s Installing: %s\n" "$((i+1))" "$py_len" "$py_pkg"
+    sudo -H pip3 install $py_pkg >> ~/Downloads/temp/install.log
 done
 
 ####################################
