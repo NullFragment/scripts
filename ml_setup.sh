@@ -27,6 +27,13 @@ bash_pkgs=(
     'openmpi-bin'
     'neovim'
     'rubygems'
+    'r-base-core'
+    'r-base-dev'
+    'r-base'
+    'r-cran-ggplot2'
+    'r-cran-reshape2'
+    'r-cran-car'
+    'r-cran-gridextra'
     )
 sh_len=${#bash_pkgs[@]}
 
@@ -38,15 +45,15 @@ py_pkgs=(
 py_len=${#py_pkgs[@]}
 
 cpu_ml_pkgs=(
-    'http://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl'
-    'https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0-cp35-cp35m-linux_x86_64.whl'
-    'tensorflow'
+    'http://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl'
+    'https://cntk.ai/PythonWheel/CPU-Only/cntk-2.2-cp35-cp35m-linux_x86_64.whl'
+    'tensorflow-gpu'
     )
 cpu_len=${#cpu_ml_pkgs[@]}
 
 gpu_ml_pkgs=(
-    'http://download.pytorch.org/whl/cu80/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl'
-    'https://cntk.ai/PythonWheel/GPU/cntk-2.0-cp35-cp35m-linux_x86_64.whl'
+    'http://download.pytorch.org/whl/cu80/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl'
+    'https://cntk.ai/PythonWheel/GPU/cntk-2.2-cp35-cp35m-linux_x86_64.whl'
     'tensorflow-gpu'
     )
 gpu_len=${#gpu_ml_pkgs[@]}
@@ -64,7 +71,12 @@ select cg in "CPU" "GPU"; do
         GPU ) x=2; break;;
     esac
 done
-echo $x
+
+if [ $x -eq "1" ] ; then
+    echo "You have selected CPU."
+elif [ $x -eq "2" ]; then
+    echo "You have selected GPU."
+fi
 
 ####################################
 ### WARNINGS / PERMISSIONS       ###
@@ -127,7 +139,7 @@ echo -e "\e[1;35m***************************************************************
 sudo -H pip3 install --upgrade pip 
 
 
-if x=1; then
+if [ $x -eq "1" ]; then
     echo -e "\e[1;31mInstalling python CPU ML packages\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
 
@@ -138,7 +150,7 @@ if x=1; then
         sudo -H pip3 install $cpu_pkg >> ~/Downloads/temp/install.log
     done
 
-elif x=2; then
+if [ $x -eq "2" ]; then
     echo -e "\e[1;31mInstalling python GPU ML packages\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
 
