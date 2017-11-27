@@ -390,7 +390,7 @@ if [ $x -eq "1" ]; then
     echo -e "\e[1;31mInstalling Extra Apt Packages\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C >> ~/Downloads/temp/install.log
-    echo 'deb http://apt.insynchq.com/ubuntu xenial non-free contrib' | sudo tee --append /etc/apt/sources.list.d/insync.list >> ~/Downloads/temp/install.log
+    echo 'deb http://apt.insynchq.com/ubuntu xenial non-free contrib' | sudo tee /etc/apt/sources.list.d/insync.list >> ~/Downloads/temp/install.log
     sudo apt-get -y update >> ~/Downloads/temp/install.log
     for i in "${!extra_pkgs[@]}"
     do 
