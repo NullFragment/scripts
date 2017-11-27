@@ -48,6 +48,7 @@ alias tma='tmux a -t'
 alias ll='ls -l'
 alias mux='tmuxinator'
 alias mlmux='tmuxinator ml_sys'
+alias acii='ssh kps168@aci-i.aci.ics.psu.edu'
 
 export EDITOR=$(which vim)
 

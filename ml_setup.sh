@@ -111,6 +111,7 @@ echo -e "\e[1;35m***************************************************************
 
 sudo apt-get install -y software-properties-common >> ~/Downloads/temp/install.log
 sudo add-apt-repository -y ppa:neovim-ppa/stable >> ~/Downloads/temp/install.log
+sudo add-apt-repository ppa:marutter/rrutter >> ~/Downloads/temp/install.log
 sudo apt-get update >> ~/Downloads/temp/install.log
 
 
@@ -121,7 +122,7 @@ sudo apt-get update >> ~/Downloads/temp/install.log
 echo -e "\e[1;31mUpgrading installed packages\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
-sudo apt-get upgrade -y >> ~/Downloads/temp/install.log
+sudo apt-get full-upgrade -y >> ~/Downloads/temp/install.log
 
 echo -e "\e[1;31mInstalling requested packages\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
@@ -278,6 +279,10 @@ echo -e "       Make sure to delete the directory to clean up unnecessary files.
 echo -e "****************************************************************************"
 echo -e "NOTE2: For Airline to display properly, change your terminal font to" 
 echo -e "       'Ubuntu Mono derivative Powerline Regular' in your profile settings."
+echo -e "****************************************************************************"
+echo -e "NOTE3: The following are commonly installed programs/packages:" 
+echo -e "       texlive-full, texmaker, insync, gitkraken, jetbrains toolbox,"
+echo -e "       matlab, r-studio, discord, atom"
 echo -e "****************************************************************************"
 
 
