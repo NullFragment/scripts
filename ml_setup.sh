@@ -32,7 +32,7 @@ bash_pkgs=(
     'r-base'
     'r-cran-ggplot2'
     'r-cran-reshape2'
-    'r-cran-censuar'
+    'r-cran-car'
     'r-cran-gridextra'
     )
 sh_len=${#bash_pkgs[@]}
