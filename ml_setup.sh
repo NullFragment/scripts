@@ -136,6 +136,17 @@ done
 echo -e "\e[1;31mEnsuring pip is up-to-date\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
+
+if [ $x -eq "2" ]; then
+    echo -e "\e[1;31mInstalling CUDA\e[0m"
+    echo -e "\e[1;35m****************************************************************************\e[0m"
+	wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+	sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+	sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+	sudo apt-get update
+	sudo apt-get install cuda
+fi
+
 sudo -H pip3 install --upgrade pip 
 
 
@@ -268,6 +279,5 @@ echo -e "***********************************************************************
 echo -e "NOTE2: For Airline to display properly, change your terminal font to" 
 echo -e "       'Ubuntu Mono derivative Powerline Regular' in your profile settings."
 echo -e "****************************************************************************"
-echo -e "NOTE3: If you are using a GPU setup, you must still install the latest"
-echo -e "       nVidia CUDA drivers manually."
-echo -e "****************************************************************************\e[0m"
+
+
