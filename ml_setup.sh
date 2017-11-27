@@ -32,7 +32,7 @@ bash_pkgs=(
     'r-base'
     'r-cran-ggplot2'
     'r-cran-reshape2'
-    'r-cran-car'
+    'r-cran-censuar'
     'r-cran-gridextra'
     )
 sh_len=${#bash_pkgs[@]}
@@ -114,7 +114,6 @@ sudo add-apt-repository -y ppa:neovim-ppa/stable >> ~/Downloads/temp/install.log
 sudo add-apt-repository ppa:marutter/rrutter >> ~/Downloads/temp/install.log
 sudo apt-get update >> ~/Downloads/temp/install.log
 
-
 ####################################
 ### UPGRADE / INSTALL            ###
 ####################################
@@ -134,22 +133,19 @@ do
     sudo -H apt-get install -y $sh_pkg >> ~/Downloads/temp/install.log
 done
 
-echo -e "\e[1;31mEnsuring pip is up-to-date\e[0m"
-echo -e "\e[1;35m****************************************************************************\e[0m"
-
-
 if [ $x -eq "2" ]; then
     echo -e "\e[1;31mInstalling CUDA\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
-	wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
-	sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
-	sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
-	sudo apt-get update
-	sudo apt-get install cuda
+    wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb >> ~/Downloads/temp/install.log
+    sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb >> ~/Downloads/temp/install.log
+    sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub >> ~/Downloads/temp/install.log
+    sudo apt-get update >> ~/Downloads/temp/install.log
+    sudo apt-get install cuda >> ~/Downloads/temp/install.log
 fi
 
-sudo -H pip3 install --upgrade pip 
-
+echo -e "\e[1;31mEnsuring pip is up-to-date\e[0m"
+echo -e "\e[1;35m****************************************************************************\e[0m"
+sudo -H pip3 install --upgrade pip >> ~/Downloads/temp/install.log
 
 if [ $x -eq "1" ]; then
     echo -e "\e[1;31mInstalling python CPU ML packages\e[0m"
@@ -162,7 +158,7 @@ if [ $x -eq "1" ]; then
         sudo -H pip3 install $cpu_pkg >> ~/Downloads/temp/install.log
     done
 
-if [ $x -eq "2" ]; then
+elif [ $x -eq "2" ]; then
     echo -e "\e[1;31mInstalling python GPU ML packages\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
 
@@ -283,6 +279,4 @@ echo -e "***********************************************************************
 echo -e "NOTE3: The following are commonly installed programs/packages:" 
 echo -e "       texlive-full, texmaker, insync, gitkraken, jetbrains toolbox,"
 echo -e "       matlab, r-studio, discord, atom"
-echo -e "****************************************************************************"
-
-
+echo -e "****************************************************************************\e[0m" 
