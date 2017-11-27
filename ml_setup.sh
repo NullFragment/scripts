@@ -5,37 +5,146 @@
 ####################################
 
 bash_pkgs=(
+    'autoconf'
+    'automake'
+    'bison'
     'build-essential'
-    'curl'
     'cmake'
-    'zsh'
-    'xterm'
-    'tmux'
-    'vim'
-    'htop'
+    'curl'
+    'default-jdk'
+    'default-jdk-headless'
+    'epstool'
+    'flex'
+    'fontconfig'
+    'g++'
+    'gcc'
+    'gfortran'
     'git'
+    'gnuplot'
+    'gnuplot-x11'
+    'gperf'
+    'gzip'
+    'hdf5-helpers'
+    'htop'
+    'icoutils'
+    'ipython3'
+    'javahelper'
+    'libaec-dev'
+    'libarpack2-dev'
+    'libblas-dev'
+    'libbtf1.2.1'
+    'libcsparse3.1.4'
+    'libcurl4-gnutls-dev'
+    'libexif-dev'
+    'libfftw3-dev'
+    'libflac-dev'
+    'libfltk1.3-dev'
+    'libfltk-cairo1.3'
+    'libfltk-forms1.3'
+    'libfltk-images1.3'
+    'libfontconfig1-dev'
+    'libfreetype6-dev'
+    'libftgl2'
+    'libftgl-dev'
+    'libgl1-mesa-dev'
+    'libgl2ps-dev'
+    'libglpk-dev'
+    'libgraphicsmagick++1-dev'
+    'libgraphicsmagick1-dev'
+    'libhdf5-cpp-11'
+    'libhdf5-dev'
+    'libhdf5-serial-dev'
+    'libjack-dev'
+    'libjasper-dev'
+    'libklu1.3.3'
+    'liblapack-dev'
+    'libldl2.2.1'
+    'libogg-dev'
+    'libosmesa6-dev'
+    'libpcre3-dev'
+    'libportaudiocpp0'
+    'libqhull-dev'
+    'libqrupdate-dev'
+    'libqscintilla2-dev'
+    'libqt4-designer'
+    'libqt4-dev'
+    'libqt4-dev-bin'
+    'libqt4-help'
+    'libqt4-network'
+    'libqt4-opengl-dev'
+    'libqt4-qt3support'
+    'libqt4-scripttools'
+    'libqt4-svg'
+    'libqt4-test'
+    'libqtcore4'
+    'libqtgui4'
+    'libqtwebkit4'
+    'libreadline-dev'
+    'librsvg2-bin'
+    'librsvg2-dev'
+    'libsndfile1-dev'
+    'libspqr2.0.2'
+    'libsuitesparse-dev'
+    'libtool'
+    'libvorbis-dev'
+    'libwmf-dev'
+    'libxft-dev'
+    'llvm-3.5-dev'
+    'llvm-dev'
+    'lpr'
+    'make'
+    'neovim'
+    'openjdk-8-jdk'
+    'openjdk-8-jdk-headless'
+    'openmpi-bin'
+    'perl'
+    'portaudio19-dev'
+    'pstoedit'
     'python'
+    'python3'
+    'python3-dev'
+    'python3-numpy'
+    'python3-pip'
+    'python3-tk'
     'python-dev'
     'python-pip'
     'python-tk'
-    'python3'
-    'python3-dev'
-    'python3-pip'
-    'python3-tk'
-    'python3-numpy'
-    'ipython3'
-    'openmpi-bin'
-    'neovim'
-    'rubygems'
+    'qt4-linguist-tools'
+    'qt4-qmake'
+    'r-base'
     'r-base-core'
     'r-base-dev'
-    'r-base'
-    'r-cran-ggplot2'
-    'r-cran-reshape2'
     'r-cran-car'
+    'r-cran-ggplot2'
     'r-cran-gridextra'
+    'r-cran-reshape2'
+    'rsync'
+    'rubygems'
+    'tar'
+    'texinfo'
+    'tmux'
+    'transfig'
+    'uuid-dev'
+    'vim'
+    'xterm'
+    'zlib1g-dev'
+    'zsh'
     )
 sh_len=${#bash_pkgs[@]}
+
+extra_pkgs=(
+    'insync'
+    'texlive-full'
+    'texmaker'
+    )
+extra_len=${#extra_pkgs[@]}
+
+snap_pkgs=(
+    'atom --classic'
+    'discord'
+    )
+snap_len=${#snap_pkgs[@]}
+
 
 py_pkgs=(
     'torchvision'
@@ -111,7 +220,7 @@ echo -e "\e[1;35m***************************************************************
 
 sudo apt-get install -y software-properties-common >> ~/Downloads/temp/install.log
 sudo add-apt-repository -y ppa:neovim-ppa/stable >> ~/Downloads/temp/install.log
-sudo add-apt-repository ppa:marutter/rrutter >> ~/Downloads/temp/install.log
+sudo add-apt-repository -y ppa:marutter/rrutter >> ~/Downloads/temp/install.log
 sudo apt-get update >> ~/Downloads/temp/install.log
 
 ####################################
@@ -140,7 +249,7 @@ if [ $x -eq "2" ]; then
     sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb >> ~/Downloads/temp/install.log
     sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub >> ~/Downloads/temp/install.log
     sudo apt-get update >> ~/Downloads/temp/install.log
-    sudo apt-get install cuda >> ~/Downloads/temp/install.log
+    sudo apt-get install -y cuda >> ~/Downloads/temp/install.log
 fi
 
 echo -e "\e[1;31mEnsuring pip is up-to-date\e[0m"
@@ -263,6 +372,42 @@ echo -e "\e[1;35m***************************************************************
 ~/Downloads/temp/fonts/install.sh
 ~/Downloads/temp/solarized/install.sh
 
+
+####################################
+### EXTRA INSTALLS               ###
+####################################
+echo -e "\e[1;35m****************************************************************************\e[0m"
+echo -e "\e[1;31mDo you want to install the extra programs?\e[0m"
+
+select cg in "Yes" "No"; do
+    case $cg in
+        Yes ) x=1; break;;
+        No  ) x=2; break;;
+    esac
+done
+
+if [ $x -eq "1" ]; then
+    echo -e "\e[1;31mInstalling Extra Apt Packages\e[0m"
+    echo -e "\e[1;35m****************************************************************************\e[0m"
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C >> ~/Downloads/temp/install.log
+    echo 'deb http://apt.insynchq.com/ubuntu xenial non-free contrib' | sudo tee --append /etc/apt/sources.list.d/insync.list >> ~/Downloads/temp/install.log
+    sudo apt-get -y update >> ~/Downloads/temp/install.log
+    for i in "${!extra_pkgs[@]}"
+    do 
+        extra_pkg=${extra_pkgs[$i]}
+        printf "%02d/%s Installing: %s\n" "$((i+1))" "$extra_len" "$extra_pkg"
+        sudo -H apt-get install -y $extra_pkg >> ~/Downloads/temp/install.log
+    done
+    echo -e "\e[1;31mInstalling Extra Snap Packages\e[0m"
+    echo -e "\e[1;35m****************************************************************************\e[0m"
+    for i in "${!snap_pkgs[@]}"
+    do 
+        snap_pkg=${snap_pkgs[$i]}
+        printf "%02d/%s Installing: %s\n" "$((i+1))" "$snap_len" "$snap_pkg"
+        sudo -H snap install $snap_pkg >> ~/Downloads/temp/install.log
+    done
+fi
+
 ####################################
 ### ENDING MATERIAL              ###
 ####################################
@@ -277,6 +422,5 @@ echo -e "NOTE2: For Airline to display properly, change your terminal font to"
 echo -e "       'Ubuntu Mono derivative Powerline Regular' in your profile settings."
 echo -e "****************************************************************************"
 echo -e "NOTE3: The following are commonly installed programs/packages:" 
-echo -e "       texlive-full, texmaker, insync, gitkraken, jetbrains toolbox,"
-echo -e "       matlab, r-studio, discord, atom"
+echo -e "       gitkraken, jetbrains toolbox, matlab, r-studio"
 echo -e "****************************************************************************\e[0m" 
