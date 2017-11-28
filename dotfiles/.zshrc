@@ -41,20 +41,26 @@ bindkey -e
 ### ALIASES & DEFAULTS
 ###################################################
 
+alias ls='ls --color=auto'
+alias cls='clear;ls'
+alias ll='ls -l'
+
+alias mux='tmuxinator'
+alias mlmux='tmuxinator ml_sys'
+
 alias tmk='tmux kill-session -t'
 alias tmn='tmux new -s'
 alias tml='tmux list-sessions'
 alias tma='tmux a -t'
-alias ll='ls -l'
-alias mux='tmuxinator'
-alias mlmux='tmuxinator ml_sys'
+
 alias acii='ssh kps168@aci-i.aci.ics.psu.edu'
 
 export EDITOR=$(which vim)
 
 ###################################################
-### PLUGINS
+### PLUGINS & MODIFICATIONS
 ###################################################
 source ~/.zsh/antigen.zsh
 antigen bundle joel-porquet/zsh-dircolors-solarized.git
-setupsolarized
+antigen apply
+setupsolarized dircolors.256dark
