@@ -220,11 +220,11 @@ mkdir ~/.tmuxinator/
 echo -e "\e[1;31mUpdating package repositories\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
-sudo apt-get install -y software-properties-common >> ~/Downloads/temp/install.log
+sudo apt install -y software-properties-common >> ~/Downloads/temp/install.log
 sudo add-apt-repository -y ppa:neovim-ppa/stable >> ~/Downloads/temp/install.log
 sudo add-apt-repository -y ppa:marutter/rrutter >> ~/Downloads/temp/install.log
 sudo add-apt-repository -y ppa:libreoffice/libreoffice-5-4 >> ~/Downloads/temp/install.log
-sudo apt-get update >> ~/Downloads/temp/install.log
+sudo apt update >> ~/Downloads/temp/install.log
 
 ####################################
 ### UPGRADE / INSTALL            ###
@@ -233,7 +233,7 @@ sudo apt-get update >> ~/Downloads/temp/install.log
 echo -e "\e[1;31mUpgrading installed packages\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
-sudo apt-get full-upgrade -y >> ~/Downloads/temp/install.log
+sudo apt full-upgrade -y >> ~/Downloads/temp/install.log
 
 echo -e "\e[1;31mInstalling requested packages\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
@@ -242,7 +242,7 @@ for i in "${!bash_pkgs[@]}"
 do 
     sh_pkg=${bash_pkgs[$i]}
     printf "%02d/%s Installing: %s\n" "$((i+1))" "$sh_len" "$sh_pkg"
-    sudo -H apt-get install -y $sh_pkg >> ~/Downloads/temp/install.log
+    sudo -H apt install -y $sh_pkg >> ~/Downloads/temp/install.log
 done
 
 if [ $x -eq "2" ]; then
@@ -251,8 +251,8 @@ if [ $x -eq "2" ]; then
     wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb >> ~/Downloads/temp/install.log
     sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb >> ~/Downloads/temp/install.log
     sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub >> ~/Downloads/temp/install.log
-    sudo apt-get update >> ~/Downloads/temp/install.log
-    sudo apt-get install -y cuda >> ~/Downloads/temp/install.log
+    sudo apt update >> ~/Downloads/temp/install.log
+    sudo apt install -y cuda >> ~/Downloads/temp/install.log
 fi
 
 echo -e "\e[1;31mEnsuring pip is up-to-date\e[0m"
@@ -299,7 +299,7 @@ done
 echo -e "\e[1;31mCleaning up unnecessary packages...\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
-sudo apt-get update >> ~/Downloads/temp/install.log
+sudo apt update >> ~/Downloads/temp/install.log
 sudo apt autoremove -y >> ~/Downloads/temp/install.log
 
 ####################################
@@ -394,12 +394,12 @@ if [ $x -eq "1" ]; then
     echo -e "\e[1;35m****************************************************************************\e[0m"
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C >> ~/Downloads/temp/install.log
     echo 'deb http://apt.insynchq.com/ubuntu xenial non-free contrib' | sudo tee /etc/apt/sources.list.d/insync.list >> ~/Downloads/temp/install.log
-    sudo apt-get -y update >> ~/Downloads/temp/install.log
+    sudo apt -y update >> ~/Downloads/temp/install.log
     for i in "${!extra_pkgs[@]}"
     do 
         extra_pkg=${extra_pkgs[$i]}
         printf "%02d/%s Installing: %s\n" "$((i+1))" "$extra_len" "$extra_pkg"
-        sudo -H apt-get install -y $extra_pkg >> ~/Downloads/temp/install.log
+        sudo -H apt install -y $extra_pkg >> ~/Downloads/temp/install.log
     done
     echo -e "\e[1;31mInstalling Extra Snap Packages\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"

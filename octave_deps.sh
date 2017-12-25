@@ -98,13 +98,13 @@ octave_deps=(
     'zlib1g-dev'
     )
 len=${#octave_deps[@]}
-echo "Running apt-get update"
-sudo apt-get update > /dev/null
+echo "Running apt update"
+sudo apt update > /dev/null
 for i in "${!octave_deps[@]}"
 do 
     pkg=${octave_deps[$i]}
     printf "%02d/%s Installing: %s\n" "$((i+1))" "$len" "$pkg"
-    sudo -H apt-get install -y $pkg > /dev/null
+    sudo -H apt install -y $pkg > /dev/null
 done
 echo "Done installing dependencies."
 echo "To install Octave:" 
