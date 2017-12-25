@@ -223,6 +223,7 @@ echo -e "\e[1;35m***************************************************************
 sudo apt-get install -y software-properties-common >> ~/Downloads/temp/install.log
 sudo add-apt-repository -y ppa:neovim-ppa/stable >> ~/Downloads/temp/install.log
 sudo add-apt-repository -y ppa:marutter/rrutter >> ~/Downloads/temp/install.log
+sudo add-apt-repository -y ppa:libreoffice/libreoffice-5-4 >> ~/Downloads/temp/install.log
 sudo apt-get update >> ~/Downloads/temp/install.log
 
 ####################################
