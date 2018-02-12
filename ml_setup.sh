@@ -167,15 +167,15 @@ py_pkgs=(
 py_len=${#py_pkgs[@]}
 
 cpu_ml_pkgs=(
-    'http://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl'
-    'https://cntk.ai/PythonWheel/CPU-Only/cntk-2.2-cp35-cp35m-linux_x86_64.whl'
-    'tensorflow-gpu'
+    'http://download.pytorch.org/whl/cpu/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl'
+    'https://cntk.ai/PythonWheel/CPU-Only/cntk-2.3-Pre-cp35-cp35m-linux_x86_64.whl'
+    'tensorflow'
     )
 cpu_len=${#cpu_ml_pkgs[@]}
 
 gpu_ml_pkgs=(
-    'http://download.pytorch.org/whl/cu80/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl'
-    'https://cntk.ai/PythonWheel/GPU/cntk-2.2-cp35-cp35m-linux_x86_64.whl'
+    'http://download.pytorch.org/whl/cu90/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl'
+    'https://cntk.ai/PythonWheel/GPU/cntk-2.3-Pre-cp35-cp35m-linux_x86_64.whl'
     'tensorflow-gpu'
     )
 gpu_len=${#gpu_ml_pkgs[@]}
@@ -276,8 +276,8 @@ done
 if [ $x -eq "2" ]; then
     echo -e "\e[1;31mInstalling CUDA\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
-    wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb >> ~/Downloads/temp/install.log
-    sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb >> ~/Downloads/temp/install.log
+    wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.1.85-1_amd64.deb >> ~/Downloads/temp/install.log
+    sudo dpkg -i cuda-repo-ubuntu1604_9.1.85-1_amd64.deb >> ~/Downloads/temp/install.log
     sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub >> ~/Downloads/temp/install.log
     sudo apt update >> ~/Downloads/temp/install.log
     sudo apt install -y cuda >> ~/Downloads/temp/install.log
