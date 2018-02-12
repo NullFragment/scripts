@@ -149,9 +149,20 @@ snap_len=${#snap_pkgs[@]}
 
 
 py_pkgs=(
-    'torchvision'
+    'jupyter'
     'keras'
+    'librosa'
     'matplotlib'
+    'mutagen'
+    'numpy'
+    'pandas'
+    'pydot'
+    'python-dotenv'
+    'requests'
+    'seaborn'
+    'scikit-learn'
+    'torchvision'
+    'tqdm'
     )
 py_len=${#py_pkgs[@]}
 
@@ -170,7 +181,7 @@ gpu_ml_pkgs=(
 gpu_len=${#gpu_ml_pkgs[@]}
 
 ####################################
-### SELECT CPU/GPU               ###
+### SELECT PACKAGES TO INSTALL   ###
 ####################################
 
 echo -e "\e[1;35m****************************************************************************\e[0m"
@@ -188,6 +199,23 @@ if [ $x -eq "1" ] ; then
 elif [ $x -eq "2" ]; then
     echo "You have selected GPU."
 fi
+
+echo -e "\e[1;35m****************************************************************************\e[0m"
+echo -e "\e[1;31mDo you want to install the extra packages?\e[0m"
+
+select cg in "Yes" "No"; do
+    case $cg in
+        Yes ) y=1; break;;
+        No  ) y=2; break;;
+    esac
+done
+
+if [ $y -eq "1" ] ; then
+    echo "You have selected to install the extra packages."
+elif [ $y -eq "2" ]; then
+    echo "You have selected to NOT install the extra packages."
+fi
+
 
 ####################################
 ### WARNINGS / PERMISSIONS       ###
@@ -366,30 +394,9 @@ echo -e "\e[1;35m***************************************************************
 sudo chsh $USER -s $(which zsh)
 
 ####################################
-### TERMINAL FIXES               ###
-####################################
-
-echo -e "\e[1;31mInstalling Powerline Fonts and Solarized terminal fix...\e[0m"
-echo -e "\e[1;35m****************************************************************************\e[0m"
-
-~/Downloads/temp/fonts/install.sh
-~/Downloads/temp/solarized/install.sh
-
-
-####################################
 ### EXTRA INSTALLS               ###
 ####################################
-echo -e "\e[1;35m****************************************************************************\e[0m"
-echo -e "\e[1;31mDo you want to install the extra programs?\e[0m"
-
-select cg in "Yes" "No"; do
-    case $cg in
-        Yes ) x=1; break;;
-        No  ) x=2; break;;
-    esac
-done
-
-if [ $x -eq "1" ]; then
+if [ $y -eq "1" ]; then
     echo -e "\e[1;31mInstalling Extra Apt Packages\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C >> ~/Downloads/temp/install.log
@@ -412,6 +419,16 @@ if [ $x -eq "1" ]; then
 fi
 
 ####################################
+### TERMINAL FIXES               ###
+####################################
+
+echo -e "\e[1;31mInstalling Powerline Fonts and Solarized terminal fix...\e[0m"
+echo -e "\e[1;35m****************************************************************************\e[0m"
+
+~/Downloads/temp/fonts/install.sh
+~/Downloads/temp/solarized/install.sh
+
+####################################
 ### ENDING MATERIAL              ###
 ####################################
 
@@ -425,5 +442,5 @@ echo -e "NOTE2: For Airline to display properly, change your terminal font to"
 echo -e "       'Ubuntu Mono derivative Powerline Regular' in your profile settings."
 echo -e "****************************************************************************"
 echo -e "NOTE3: The following are commonly installed programs/packages:" 
-echo -e "       gitkraken, jetbrains toolbox, matlab, r-studio"
+echo -e "       gitkraken, jetbrains toolbox, matlab, r-studio, nylas mail"
 echo -e "****************************************************************************\e[0m" 
