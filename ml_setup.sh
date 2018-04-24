@@ -7,6 +7,7 @@
 bash_pkgs=(
     'autoconf'
     'automake'
+    'bazel'
     'bison'
     'build-essential'
     'cmake'
@@ -156,8 +157,10 @@ py_pkgs=(
     'requests'
     'seaborn'
     'scikit-learn'
+    'six'
     'torchvision'
     'tqdm'
+    'wheel'
     )
 py_len=${#py_pkgs[@]}
 
@@ -171,7 +174,6 @@ cpu_len=${#cpu_ml_pkgs[@]}
 gpu_ml_pkgs=(
     'http://download.pytorch.org/whl/cu90/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl'
     'https://cntk.ai/PythonWheel/GPU/cntk-2.3-Pre-cp35-cp35m-linux_x86_64.whl'
-    'tensorflow-gpu'
     )
 gpu_len=${#gpu_ml_pkgs[@]}
 
@@ -192,7 +194,7 @@ done
 if [ $x -eq "1" ] ; then
     echo "You have selected CPU."
 elif [ $x -eq "2" ]; then
-    echo "You have selected GPU."
+    echo "You have selected GPU. TENSORFLOW MUST BE INSTALLED FROM SOURCE!"
 fi
 
 echo -e "\e[1;35m****************************************************************************\e[0m"
@@ -211,7 +213,23 @@ elif [ $y -eq "2" ]; then
     echo "You have selected to NOT install the extra packages."
 fi
 
+if [ $x -eq "2" ] ; then
+    echo -e "\e[1;35m****************************************************************************\e[0m"
+    echo -e "\e[1;31mDo you want to begin building Tensorflow immediately?\e[0m"
 
+    select cg in "Yes" "No"; do
+        case $cg in
+            Yes ) z=1; break;;
+            No  ) z=2; break;;
+        esac
+    done
+
+    if [ $z -eq "1" ] ; then
+        echo "You have selected to start the Tensorflow build automatically."
+    elif [ $z -eq "2" ]; then
+        echo "You have selected to NOT start the Tensorflow build automatically."
+    fi
+fi
 ####################################
 ### WARNINGS / PERMISSIONS       ###
 ####################################
@@ -247,6 +265,8 @@ sudo apt-get install -y software-properties-common >> ~/Downloads/temp/install.l
 sudo add-apt-repository -y ppa:neovim-ppa/stable >> ~/Downloads/temp/install.log
 sudo add-apt-repository -y ppa:marutter/rrutter >> ~/Downloads/temp/install.log
 sudo add-apt-repository -y ppa:libreoffice/libreoffice-5-4 >> ~/Downloads/temp/install.log
+echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list >> ~/Downloads/temp/install.log
+curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add - >> ~/Downloads/temp/install.log
 sudo apt-get update >> ~/Downloads/temp/install.log
 
 ####################################
@@ -335,7 +355,9 @@ echo -e "\e[1;35m***************************************************************
 git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git ~/Downloads/temp/solarized
 git clone https://github.com/powerline/fonts.git ~/Downloads/temp/fonts
 git clone https://github.com/NullFragment/scripts.git ~/Downloads/temp/scripts
-
+elif [ $x -eq "2" ]; then
+    git clone https://github.com/tensorflow/tensorflow  ~/Downloads/temp/tensorflow
+fi
 ####################################
 ### DOTFILES                     ###
 ####################################
@@ -424,13 +446,28 @@ echo -e "\e[1;35m***************************************************************
 ~/Downloads/temp/solarized/install.sh
 
 ####################################
+### BUILD TENSORFLOW             ###
+####################################
+if [ $z -eq "1" ]; then
+    echo -e "\e[1;31mBeggining Tensorflow compile and installation process...\e[0m"
+    echo -e "\e[1;35m****************************************************************************\e[0m"
+    cd ~/Downloads/temp/tensorflow
+    ./configure
+    bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
+    bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+    sudo pip install /tmp/tensorflow_pkg/tensorflow-*.whl
+fi
+####################################
 ### ENDING MATERIAL              ###
 ####################################
 
 echo -e "\e[1;35m****************************************************************************\e[0m"
 echo -e "\e[1;31mFinished installing. Log out and back in for changes to take effect."
 echo -e "****************************************************************************"
-echo -e "NOTE1: Check the log file at ~/Downloads/temp/ if you'd like."
+echo -e "NOTE1: Due to CUDA >9.0, Tensorflow for GPU must be installed from source if"
+echo -e "       not already done. The TF repository was cloned into ~/Downloads/temp "
+echo -e "****************************************************************************"
+echo -e "NOTE2: Check the log file at ~/Downloads/temp/ if you'd like."
 echo -e "       Make sure to delete the directory to clean up unnecessary files."
 echo -e "****************************************************************************"
 echo -e "NOTE2: For Airline to display properly, change your terminal font to"
