@@ -11,8 +11,8 @@ bash_pkgs=(
     'build-essential'
     'cmake'
     'curl'
-    'default-jdk'
     'default-jdk-headless'
+    'default-jdk'
     'epstool'
     'flex'
     'fontconfig'
@@ -20,8 +20,8 @@ bash_pkgs=(
     'gcc'
     'gfortran'
     'git'
-    'gnuplot'
     'gnuplot-x11'
+    'gnuplot'
     'gperf'
     'gzip'
     'hdf5-helpers'
@@ -39,14 +39,14 @@ bash_pkgs=(
     'libexif-dev'
     'libfftw3-dev'
     'libflac-dev'
-    'libfltk1.3-dev'
     'libfltk-cairo1.3'
     'libfltk-forms1.3'
     'libfltk-images1.3'
+    'libfltk1.3-dev'
     'libfontconfig1-dev'
     'libfreetype6-dev'
-    'libftgl2'
     'libftgl-dev'
+    'libftgl2'
     'libgl1-mesa-dev'
     'libgl2ps-dev'
     'libglpk-dev'
@@ -68,8 +68,8 @@ bash_pkgs=(
     'libqrupdate-dev'
     'libqscintilla2-dev'
     'libqt4-designer'
-    'libqt4-dev'
     'libqt4-dev-bin'
+    'libqt4-dev'
     'libqt4-help'
     'libqt4-network'
     'libqt4-opengl-dev'
@@ -94,27 +94,24 @@ bash_pkgs=(
     'llvm-dev'
     'lpr'
     'make'
-    'neovim'
-    'openjdk-8-jdk'
     'openjdk-8-jdk-headless'
-    'openmpi-bin'
+    'openjdk-8-jdk'
     'perl'
     'portaudio19-dev'
     'pstoedit'
-    'python'
-    'python3'
-    'python3-dev'
-    'python3-numpy'
-    'python3-pip'
-    'python3-tk'
     'python-dev'
     'python-pip'
     'python-tk'
+    'python'
+    'python3-dev'
+    'python3-pip'
+    'python3-tk'
+    'python3'
     'qt4-linguist-tools'
     'qt4-qmake'
-    'r-base'
     'r-base-core'
     'r-base-dev'
+    'r-base'
     'r-cran-car'
     'r-cran-ggplot2'
     'r-cran-gridextra'
@@ -127,8 +124,6 @@ bash_pkgs=(
     'transfig'
     'uuid-dev'
     'valgrind'
-    'vim'
-    'xterm'
     'zlib1g-dev'
     'zsh'
     )
@@ -267,7 +262,7 @@ echo -e "\e[1;31mInstalling requested packages\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
 for i in "${!bash_pkgs[@]}"
-do 
+do
     sh_pkg=${bash_pkgs[$i]}
     printf "%02d/%s Installing: %s\n" "$((i+1))" "$sh_len" "$sh_pkg"
     sudo -H apt-get install -y $sh_pkg >> ~/Downloads/temp/install.log
@@ -292,7 +287,7 @@ if [ $x -eq "1" ]; then
     echo -e "\e[1;35m****************************************************************************\e[0m"
 
     for i in "${!cpu_ml_pkgs[@]}"
-    do 
+    do
         cpu_pkg=${cpu_ml_pkgs[$i]}
         printf "%02d/%s Installing: %s\n" "$((i+1))" "$cpu_len" "$cpu_pkg"
         sudo -H pip3 install $cpu_pkg >> ~/Downloads/temp/install.log
@@ -303,7 +298,7 @@ elif [ $x -eq "2" ]; then
     echo -e "\e[1;35m****************************************************************************\e[0m"
 
     for i in "${!gpu_ml_pkgs[@]}"
-    do 
+    do
         gpu_pkg=${gpu_ml_pkgs[$i]}
         printf "%02d/%s Installing: %s\n" "$((i+1))" "$gpu_len" "$gpu_pkg"
         sudo -H pip3 install $gpu_pkg >> ~/Downloads/temp/install.log
@@ -314,7 +309,7 @@ echo -e "\e[1;31mInstalling universal python packages\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
 for i in "${!py_pkgs[@]}"
-do 
+do
     py_pkg=${py_pkgs[$i]}
     printf "%02d/%s Installing: %s\n" "$((i+1))" "$py_len" "$py_pkg"
     sudo -H pip3 install $py_pkg >> ~/Downloads/temp/install.log
@@ -337,7 +332,7 @@ sudo apt-get autoremove -y >> ~/Downloads/temp/install.log
 echo -e "\e[1;31mDownloading github repos...\e[0m"
 echo -e "\e[1;35m****************************************************************************\e[0m"
 
-git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git ~/Downloads/temp/solarized 
+git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git ~/Downloads/temp/solarized
 git clone https://github.com/powerline/fonts.git ~/Downloads/temp/fonts
 git clone https://github.com/NullFragment/scripts.git ~/Downloads/temp/scripts
 
@@ -403,7 +398,7 @@ if [ $y -eq "1" ]; then
     echo 'deb http://apt.insynchq.com/ubuntu xenial non-free contrib' | sudo tee /etc/apt/sources.list.d/insync.list >> ~/Downloads/temp/install.log
     sudo apt-get -y update >> ~/Downloads/temp/install.log
     for i in "${!extra_pkgs[@]}"
-    do 
+    do
         extra_pkg=${extra_pkgs[$i]}
         printf "%02d/%s Installing: %s\n" "$((i+1))" "$extra_len" "$extra_pkg"
         sudo -H apt-get install -y $extra_pkg >> ~/Downloads/temp/install.log
@@ -411,7 +406,7 @@ if [ $y -eq "1" ]; then
     echo -e "\e[1;31mInstalling Extra Snap Packages\e[0m"
     echo -e "\e[1;35m****************************************************************************\e[0m"
     for i in "${!snap_pkgs[@]}"
-    do 
+    do
         snap_pkg=${snap_pkgs[$i]}
         printf "%02d/%s Installing: %s\n" "$((i+1))" "$snap_len" "$snap_pkg"
         sudo -H snap install $snap_pkg >> ~/Downloads/temp/install.log
@@ -438,9 +433,9 @@ echo -e "***********************************************************************
 echo -e "NOTE1: Check the log file at ~/Downloads/temp/ if you'd like."
 echo -e "       Make sure to delete the directory to clean up unnecessary files."
 echo -e "****************************************************************************"
-echo -e "NOTE2: For Airline to display properly, change your terminal font to" 
+echo -e "NOTE2: For Airline to display properly, change your terminal font to"
 echo -e "       'Ubuntu Mono derivative Powerline Regular' in your profile settings."
 echo -e "****************************************************************************"
-echo -e "NOTE3: The following are commonly installed programs/packages:" 
+echo -e "NOTE3: The following are commonly installed programs/packages:"
 echo -e "       gitkraken, jetbrains toolbox, matlab, r-studio, nylas mail"
-echo -e "****************************************************************************\e[0m" 
+echo -e "****************************************************************************\e[0m"
