@@ -31,8 +31,6 @@ elif [ "$#" -eq 1 ]; then
         GAME_DIR="$1"
 fi
 
-echo "$GAME_DIR/eldenring.exe"
-
 if [ ! -f "$GAME_DIR/eldenring.exe" ]; then
         >&2 echo "eldenring.exe not found"
         exit 2
