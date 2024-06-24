@@ -54,4 +54,42 @@ rclone_watch_sync(){
 	done
 }
 
-rclone_watch_sync
+
+systemd_setup() {
+    set -x
+    if loginctl show-user "${USER}" | grep "Linger=no"; then
+	    echo "User account does not allow systemd Linger."
+	    echo "To enable lingering, run as root: loginctl enable-linger $USER"
+	    echo "Then try running this command again."
+	    exit 1
+    fi
+    mkdir -p "${HOME}"/.config/systemd/user
+    SERVICE_FILE=${HOME}/.config/systemd/user/rclone_watch_sync.${RCLONE_REMOTE}.service
+    if test -f "${SERVICE_FILE}"; then
+	    echo "Unit file already exists: ${SERVICE_FILE} - Not overwriting."
+    else
+	    cat <<EOF > "${SERVICE_FILE}"
+[Unit]
+Description=rclone_watch_sync ${RCLONE_REMOTE}
+
+[Service]
+ExecStart=${SYNC_SCRIPT}
+ExecStop=$(killall -15 ${SYNC_SCRIPT})
+
+[Install]
+WantedBy=default.target
+EOF
+    fi
+    systemctl --user daemon-reload
+    systemctl --user enable --now rclone_watch_sync.${RCLONE_REMOTE}
+    systemctl --user status rclone_watch_sync.${RCLONE_REMOTE}
+    echo "You can watch the logs with this command:"
+    echo "   journalctl --user --unit rclone_watch_sync.${RCLONE_REMOTE}"
+}
+
+if test $# = 0; then
+    rclone_watch_sync
+else
+    CMD=$1; shift;
+    ${CMD} "$@"
+fi
