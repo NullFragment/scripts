@@ -1,0 +1,1 @@
+MANGOHUD_CONFIG=core_load,gpu_mem_clock,ram,cpu_temp,gpu_temp,position=top-left,background_alpha=0.5 mangohud
